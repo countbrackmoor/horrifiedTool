@@ -851,8 +851,8 @@ ol.tight li { margin-bottom: 3px; }
     <span class="val" id="t-deck">30</span>
     <button onclick="adjust('deck',1)">+</button>
   </div>
-  <div class="stat" id="t-frenzy-wrap" style="display:none">
-    <span class="label">Frenzy</span>
+  <div class="stat" id="t-frenzy-wrap" style="display:none; cursor:pointer" onclick="cycleFrenzy()" title="Tap to pass Frenzy to next Monster">
+    <span class="label">Frenzy ↻</span>
     <span class="val" id="t-frenzy">—</span>
   </div>
   <div class="alert" id="t-alert" style="display:none"></div>
@@ -1925,6 +1925,19 @@ function setFrenzy(id) {
   saveState();
   renderMM();
   renderTopbar();
+}
+
+function cycleFrenzy() {
+  // Per rulebook: move to monster with next-highest Frenzy Order; wrap to lowest if none higher.
+  const inPlay = state.monstersInPlay.slice().sort((a,b) => MONSTERS[a].frenzy - MONSTERS[b].frenzy);
+  if (inPlay.length === 0) return;
+  if (inPlay.length === 1) return; // only one monster, marker doesn't move
+  const currentFrenzy = state.frenzyHolder ? MONSTERS[state.frenzyHolder].frenzy : -1;
+  const next = inPlay.find(id => MONSTERS[id].frenzy > currentFrenzy) || inPlay[0];
+  state.frenzyHolder = next;
+  saveState();
+  renderTopbar();
+  renderMM();
 }
 
 /* ============================================================

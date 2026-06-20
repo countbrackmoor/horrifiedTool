@@ -18,21 +18,21 @@ No install, no account, no data leaves your browser. One HTML file.
 
 The sticky topbar shows **Terror**, **Deck count**, and **Frenzy marker** at all times. Tap any tile on the hub to open a module.
 
-| # | Module | What it does |
-|---|---|---|
-| 1 | **Turn Coach** | Interactive walkthrough of your turn — tap where you are, get the right rule |
-| 2 | **Monster Card Walker** | Step-by-step resolution for a drawn Monster card: Items → Event → Attack |
-| 3 | **Attack Resolver** | Resolves POW before HIT, surfaces target priority and defense options |
-| 4 | **Hero Reference** | Pick your Hero, roll d20, look up your ability result, bank effects |
-| 5 | **Movement Compass** | Answers "who does this Monster move toward?" with a priority checker |
-| 6 | **Eye Ray Tracker** | d20 → Beholder ray lookup, plus persistent eyestalk damage tracking |
-| 7 | **Monster Mats** | All 5 monsters — Advance steps, Defeat conditions, rules notes |
-| 8 | **Item Lookup** | Full item list filterable by color (Red/Blue/Yellow), shape, strength, and location; cumulative strength calculator |
-| 9 | **Lair Helper** | Tracks the 4 lair tokens (Skull Island, Dragon's Platform, Obelisk of the Eye, Abandoned Camp) — hidden / revealed / blank |
-| 10 | **Setup Wizard** | Guided setup: player count → monster selection → hero picks → printable checklist |
-| 11 | **Glossary** | Searchable A–Z of every rule term used in the game |
+| # | Tier | Module | What it does |
+|---|---|---|---|
+| 1 | Essential | **Turn Coach** | Lost mid-turn? Interactive walkthrough to the right rule |
+| 2 | Essential | **Monster Card Walker** | Resolve a drawn card in 3 steps: Items → Event → Attack |
+| 3 | Essential | **Attack Resolver** | POW before HIT, target priority, defense options |
+| 4 | Essential | **Hero Reference** | Pick your Hero, roll d20, look up your ability result, bank effects |
+| 5 | Useful | **Movement Compass** | Answers "who does this Monster move toward?" — Heroes beat Citizens |
+| 6 | Essential | **Eye Ray Tracker** | d20 → Beholder ray lookup, plus persistent eyestalk damage tracking |
+| 7 | Essential | **Monster Mats** | All 5 monsters — Step 1 Advance, Step 2 Defeat, rules notes |
+| 8 | Useful | **Item Lookup** | Full item list filterable by color, shape, strength, and location; cumulative strength calculator |
+| 9 | Nice | **Lair Helper** | Tracks the 4 lair tokens (Skull Island, Dragon's Platform, Obelisk of the Eye, Abandoned Camp) — hidden / revealed / blank |
+| 10 | Useful | **Setup Wizard** | Pick player count, get a setup checklist for your first game |
+| 11 | Nice | **Glossary** | A–Z of every game term, searchable |
 
-**New Game** (hub tile) wipes all tracked state — terror, eyestalks, lairs, banked effects — and resets to a fresh session.
+**New Game** (hub tile) wipes all tracked state — terror, eyestalks, lairs, banked hero effects — and resets to a fresh session.
 
 ---
 
