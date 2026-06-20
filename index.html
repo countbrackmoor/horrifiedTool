@@ -2771,5 +2771,16 @@ document.getElementById('gloss-search').addEventListener('input', e => renderGlo
 
 </script>
 
+<script src="../nav.js" onerror="void 0"></script>
+<script>
+// Adjust sticky header position when running under gorgon.live nav bar
+(function () {
+  var gnav = document.getElementById("gorgon-nav");
+  var stickyHeader = document.querySelector(".sticky-header");
+  if (gnav && stickyHeader) {
+    stickyHeader.style.top = gnav.offsetHeight + "px";
+  }
+}());
+</script>
 </body>
 </html>
