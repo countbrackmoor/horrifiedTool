@@ -1,0 +1,2221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<meta name="theme-color" content="#f5ead0">
+<title>Horrified D&D — New Player Toolkit</title>
+<style>
+/* ===========================================
+   PALETTE (audited for contrast)
+   --ink:        #1a1208  (dark text on light)
+   --paper:      #f5ead0  (main bg)
+   --paper-2:    #fdf5dd  (card bg)
+   --paper-3:    #faf2dc  (alt card bg)
+   --rust:       #7a1d1d  (primary accent)
+   --rust-dark:  #4a0a0a  (dark accent / strong text)
+   --rust-text:  #5a1010  (rust used as text on cream)
+   --gold:       #c9a24a  (border accent)
+   --gold-light: #f0c870  (text on dark brown ONLY)
+   --brown-dark: #2a1a0a  (dark bg for gold text)
+   --ink-soft:   #3a2308  (secondary text on cream — AAA contrast)
+   --green:      #2d5a2d  (success bg, white text on it)
+   --amber:      #f4d77a  (warning bg, dark ink on it)
+   --blue-bg:    #cce0f0  (info bg, dark ink on it)
+   --blue-text:  #1a4060  (info accent text)
+   =========================================== */
+* { box-sizing: border-box; }
+:root {
+  color-scheme: light only;
+}
+html {
+  background-color: #f5ead0;
+  color-scheme: light only;
+}
+html, body {
+  margin: 0; padding: 0;
+  font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, sans-serif;
+  font-size: 15px; line-height: 1.5;
+  color: #1a1208;
+  background-color: #f5ead0;
+  -webkit-text-size-adjust: 100%;
+  forced-color-adjust: none;
+}
+body {
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(120,60,20,0.05) 0, transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(120,60,20,0.05) 0, transparent 40%);
+  min-height: 100vh;
+}
+
+/* ============ TOP BAR (Pace Tracker M12) ============ */
+.topbar {
+  position: sticky; top: 0;
+  background: #2a1a0a;
+  color: #f0c870;
+  z-index: 100;
+  border-bottom: 3px solid #c9a24a;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 6px 10px;
+  gap: 10px;
+  font-size: 13px;
+}
+.topbar .title {
+  font-family: Georgia, serif;
+  font-weight: bold;
+  font-size: 15px;
+  color: #f0c870;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-right: 1px solid #c9a24a;
+}
+.topbar .stat {
+  display: flex; align-items: center; gap: 5px;
+  background: #4a0a0a;
+  color: #f0c870;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #7a1d1d;
+}
+.topbar .stat .label { color: #e0b860; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+.topbar .stat .val { font-weight: bold; font-size: 16px; color: #f0c870; }
+.topbar .stat button {
+  background: #7a1d1d; color: #f0c870; border: none;
+  width: 22px; height: 22px; border-radius: 3px;
+  cursor: pointer; font-weight: bold; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.topbar .stat button:hover { background: #b02020; }
+.topbar .alert {
+  background: #f4d77a; color: #1a1208;
+  padding: 3px 8px; border-radius: 4px;
+  font-size: 12px; font-weight: bold;
+  border: 1px solid #b08a20;
+}
+.topbar .spacer { flex: 1; }
+.topbar .home-btn {
+  background: #7a1d1d; color: #f0c870; border: none;
+  padding: 5px 12px; border-radius: 4px;
+  cursor: pointer; font-weight: bold; font-size: 13px;
+}
+.topbar .home-btn:hover { background: #b02020; }
+
+/* ============ HUB ============ */
+.hub-header {
+  text-align: center;
+  padding: 26px 16px 14px;
+  background-color: #f5ead0;
+}
+.hub-header h1 {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  color: #7a1d1d;
+  margin: 0 0 4px 0;
+  letter-spacing: 0.5px;
+}
+.hub-header .sub {
+  color: #3a2308;
+  font-style: italic;
+  font-size: 14px;
+}
+.hub-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.tile {
+  background: #fdf5dd;
+  border: 2px solid #c9a24a;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s, border-color 0.1s;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(74,10,10,0.2);
+  border-color: #7a1d1d;
+}
+.tile .icon {
+  font-size: 28px; margin-bottom: 6px;
+}
+.tile .num {
+  font-family: Georgia, serif;
+  color: #7a1d1d; font-weight: bold; font-size: 13px;
+  letter-spacing: 0.5px;
+}
+.tile .name {
+  font-family: Georgia, serif;
+  font-size: 17px; font-weight: bold;
+  color: #1a1208;
+  margin: 2px 0 6px;
+}
+.tile .desc {
+  color: #3a2308;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.tile .tier {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #7a1d1d;
+}
+
+/* ============ MODULE PAGES ============ */
+.module {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 14px 16px 60px;
+  display: none;
+  background-color: #f5ead0;
+}
+.module.active { display: block; }
+.module h2 {
+  font-family: Georgia, serif;
+  color: #7a1d1d;
+  font-size: 24px;
+  margin: 12px 0 4px;
+  border-bottom: 2px solid #c9a24a;
+  padding-bottom: 6px;
+}
+.module .blurb {
+  color: #3a2308;
+  font-style: italic;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+.module h3 {
+  color: #7a1d1d;
+  font-size: 17px;
+  margin: 18px 0 6px;
+  border-left: 4px solid #c9a24a;
+  padding-left: 10px;
+}
+.module p { margin: 6px 0 10px; }
+
+/* ============ COMMON COMPONENTS ============ */
+.card {
+  background: #fdf5dd;
+  border: 1px solid #c9a24a;
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin: 8px 0;
+}
+.card-dark {
+  background: #2a1a0a;
+  color: #f0c870;
+  border: 1px solid #c9a24a;
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin: 8px 0;
+}
+.card-dark h3, .card-dark h4 { color: #f0c870; }
+.card-warn {
+  background: #f4d77a;
+  color: #1a1208;
+  border: 1px solid #b08a20;
+  border-left: 4px solid #b08a20;
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin: 8px 0;
+}
+.card-info {
+  background: #cce0f0;
+  color: #1a4060;
+  border: 1px solid #1a4060;
+  border-left: 4px solid #1a4060;
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin: 8px 0;
+}
+.card-info b { color: #0a2540; }
+.card-success {
+  background: #2d5a2d;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin: 8px 0;
+}
+
+button.primary {
+  background: #7a1d1d;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 3px 4px 3px 0;
+}
+button.primary:hover { background: #b02020; }
+button.primary:disabled { background: #b8a890; color: #3a2308; cursor: not-allowed; }
+
+button.secondary {
+  background: #fdf5dd;
+  color: #5a1010;
+  border: 1.5px solid #7a1d1d;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+  margin: 3px 4px 3px 0;
+}
+button.secondary:hover { background: #f4d77a; }
+button.secondary.active {
+  background: #7a1d1d;
+  color: #fff;
+}
+
+button.choice {
+  display: block;
+  width: 100%;
+  background: #fdf5dd;
+  color: #1a1208;
+  border: 2px solid #c9a24a;
+  border-left: 5px solid #7a1d1d;
+  padding: 12px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: left;
+  margin: 6px 0;
+  font-family: inherit;
+  font-weight: 600;
+}
+button.choice:hover {
+  background: #f4d77a;
+  border-color: #7a1d1d;
+}
+button.choice .sub {
+  display: block;
+  font-size: 12.5px;
+  font-weight: normal;
+  color: #3a2308;
+  margin-top: 3px;
+}
+
+input[type="number"], select, input[type="text"] {
+  background: #fff;
+  color: #1a1208;
+  border: 1.5px solid #7a1d1d;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.pill {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 11px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+  margin-right: 3px;
+  color: #fff;
+}
+.p-red    { background: #b02020; }
+.p-blue   { background: #1a4060; }
+.p-yellow { background: #b08a20; color: #1a1208; }
+.p-purple { background: #5a2870; }
+.p-orange { background: #a04818; }
+.p-green  { background: #2d5a2d; }
+.p-brown  { background: #5a3a1a; }
+.p-teal   { background: #1a6060; }
+
+.shape {
+  display: inline-block;
+  width: 22px; height: 22px;
+  text-align: center;
+  line-height: 22px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.shape.weapon  { background: #b02020; clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%); }
+.shape.magical { background: #1a4060; border-radius: 50%; }
+.shape.mundane { background: #b08a20; color: #1a1208; }
+
+.kbd {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #7a1d1d;
+  padding: 0 6px;
+  border-radius: 3px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: #5a1010;
+  font-weight: bold;
+}
+.cite {
+  color: #3a2308;
+  font-size: 12px;
+  font-style: italic;
+}
+.muted { color: #3a2308; font-size: 13px; }
+strong, b { color: #1a1208; }
+.rust-text { color: #5a1010; font-weight: bold; }
+
+ul.tight { margin: 4px 0 8px; padding-left: 22px; }
+ul.tight li { margin-bottom: 3px; }
+ol.tight { margin: 4px 0 8px; padding-left: 22px; }
+ol.tight li { margin-bottom: 3px; }
+
+/* ============ HERO TILES ============ */
+.hero-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+}
+.hero-pick {
+  background: #fdf5dd;
+  border: 2px solid #c9a24a;
+  border-radius: 6px;
+  padding: 12px 10px;
+  text-align: center;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  font-weight: bold;
+  color: #1a1208;
+}
+.hero-pick:hover { background: #f4d77a; }
+.hero-pick.active {
+  background: #7a1d1d;
+  color: #fff;
+  border-color: #4a0a0a;
+}
+.hero-pick .icon { font-size: 22px; display: block; margin-bottom: 3px; }
+.hero-pick .lvl { font-size: 11px; font-weight: normal; color: #3a2308; display: block; margin-top: 3px; }
+.hero-pick.active .lvl { color: #f0c870; }
+
+.hero-sheet {
+  background: #fdf5dd;
+  border: 2px solid #7a1d1d;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-top: 12px;
+}
+.hero-sheet .header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #c9a24a;
+  padding-bottom: 8px;
+}
+.hero-sheet .name {
+  font-family: Georgia, serif;
+  font-size: 22px;
+  color: #5a1010;
+  font-weight: bold;
+}
+.hero-sheet .meta {
+  font-size: 13px; color: #3a2308; text-align: right;
+}
+.band {
+  background: #faf2dc;
+  border-left: 4px solid #c9a24a;
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-radius: 0 4px 4px 0;
+  font-size: 13.5px;
+}
+.band .roll {
+  display: inline-block;
+  background: #5a1010; color: #f0c870;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-weight: bold;
+  margin-right: 8px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+}
+.band.matched {
+  background: #f4d77a;
+  border-left-color: #7a1d1d;
+  border: 2px solid #7a1d1d;
+}
+
+.dice-display {
+  background: #2a1a0a;
+  color: #f0c870;
+  padding: 14px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 12px 0;
+}
+.dice-display .die-face {
+  display: inline-block;
+  background: #7a1d1d;
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  width: 70px; height: 70px;
+  line-height: 70px;
+  border-radius: 8px;
+  margin: 6px;
+  font-family: Georgia, serif;
+  border: 3px solid #c9a24a;
+}
+
+/* ============ EYE RAY TRACKER ============ */
+.eyestalk-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin: 10px 0;
+}
+.eyestalk {
+  background: #fdf5dd;
+  border: 2px solid #c9a24a;
+  padding: 8px 6px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 12px;
+  user-select: none;
+}
+.eyestalk:hover { background: #f4d77a; }
+.eyestalk.damaged {
+  background: #4a0a0a;
+  color: #f0c870;
+  border-color: #2a0a0a;
+  text-decoration: line-through;
+}
+.eyestalk .num {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  color: #5a1010;
+  font-family: ui-monospace, monospace;
+}
+.eyestalk.damaged .num { color: #f0c870; }
+.eyestalk .name {
+  display: block;
+  font-size: 10px;
+  margin-top: 2px;
+  color: #3a2308;
+}
+.eyestalk.damaged .name { color: #e0b860; }
+
+/* ============ MONSTER MATS ============ */
+.monster-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #c9a24a;
+}
+.monster-tab {
+  background: #fdf5dd;
+  border: 1px solid #c9a24a;
+  border-bottom: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  font-weight: bold;
+  color: #5a1010;
+  font-size: 13px;
+}
+.monster-tab.active {
+  background: #7a1d1d;
+  color: #fff;
+  border-color: #4a0a0a;
+}
+.monster-tab .frenzy-num {
+  display: inline-block;
+  background: #c9a24a;
+  color: #1a1208;
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 8px;
+  margin-left: 4px;
+  font-weight: bold;
+}
+.monster-tab.active .frenzy-num { background: #f0c870; }
+
+.step-block {
+  background: #fdf5dd;
+  border: 1px solid #c9a24a;
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin: 10px 0;
+}
+.step-block .step-label {
+  display: inline-block;
+  background: #7a1d1d; color: #fff;
+  padding: 2px 10px;
+  border-radius: 3px;
+  font-family: Georgia, serif;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-right: 6px;
+}
+.step-block .step-title {
+  font-weight: bold;
+  color: #5a1010;
+  font-size: 15px;
+}
+
+/* ============ ITEM LOOKUP ============ */
+.filter-bar {
+  background: #fdf5dd;
+  border: 1px solid #c9a24a;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.filter-bar > div { margin-bottom: 6px; }
+.filter-bar > div:last-child { margin-bottom: 0; }
+.filter-bar .label {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 12px;
+  color: #5a1010;
+  margin-right: 6px;
+  width: 65px;
+  text-transform: uppercase;
+}
+.chip {
+  display: inline-block;
+  background: #fdf5dd;
+  color: #1a1208;
+  border: 1.5px solid #c9a24a;
+  padding: 3px 9px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 12px;
+  margin: 2px;
+  font-weight: 600;
+}
+.chip:hover { background: #f4d77a; }
+.chip.active {
+  background: #7a1d1d;
+  color: #fff;
+  border-color: #4a0a0a;
+}
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+}
+.item-card {
+  background: #fdf5dd;
+  border: 1.5px solid #c9a24a;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.item-card:hover { background: #f4d77a; border-color: #7a1d1d; }
+.item-card.selected {
+  background: #f4d77a;
+  border: 2px solid #7a1d1d;
+}
+.item-card .top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 4px;
+}
+.item-card .name { font-weight: bold; color: #1a1208; font-size: 14px; }
+.item-card .str {
+  display: inline-block;
+  background: #5a1010; color: #f0c870;
+  width: 24px; height: 24px;
+  line-height: 24px; text-align: center;
+  border-radius: 50%;
+  font-weight: bold;
+  font-family: ui-monospace, monospace;
+}
+.item-card .loc { color: #3a2308; font-size: 11px; font-style: italic; }
+.calc-bar {
+  background: #2a1a0a;
+  color: #f0c870;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 10px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 8px;
+}
+.calc-bar .calc-total { font-size: 22px; font-weight: bold; color: #f0c870; font-family: Georgia, serif; }
+.calc-bar .calc-label { font-size: 12px; color: #e0b860; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ============ LAIR HELPER ============ */
+.lair-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.lair-card {
+  background: #fdf5dd;
+  border: 2px solid #c9a24a;
+  border-radius: 6px;
+  padding: 12px;
+}
+.lair-card.revealed { border-color: #2d5a2d; background: #e0f0d8; }
+.lair-card.blank { border-color: #3a2308; background: #efe0c0; }
+.lair-card .lair-name {
+  font-weight: bold;
+  color: #5a1010;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.lair-card .status {
+  font-size: 12px;
+  margin-bottom: 6px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.status.hidden { background: #5a3a1a; color: #f0c870; }
+.status.revealed { background: #2d5a2d; color: #fff; }
+.status.blank { background: #b08a20; color: #1a1208; }
+
+/* ============ GLOSSARY ============ */
+.glossary-search {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+.glossary-list dt {
+  background: #5a1010;
+  color: #f0c870;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 8px 0 4px;
+  font-family: Georgia, serif;
+}
+.glossary-list dd {
+  margin: 0 0 4px 0;
+  padding: 0 0 4px 12px;
+  border-left: 2px solid #c9a24a;
+  color: #1a1208;
+  font-size: 13.5px;
+}
+
+/* ============ ATTACK RESOLVER ============ */
+.dice-input {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin: 10px 0;
+}
+.die-pick {
+  width: 56px; height: 56px;
+  background: #fdf5dd;
+  border: 2px solid #c9a24a;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex; align-items: center; justify-content: center;
+  color: #1a1208;
+}
+.die-pick:hover { background: #f4d77a; }
+.die-pick.pow { background: #b02020; color: #fff; border-color: #5a1010; }
+.die-pick.hit { background: #c9a24a; color: #1a1208; border-color: #8b6920; }
+.die-pick.blank { background: #5a3a1a; color: #f0c870; }
+
+.target-pill {
+  display: inline-block;
+  background: #fdf5dd;
+  border: 1.5px solid #7a1d1d;
+  padding: 4px 10px;
+  border-radius: 14px;
+  margin: 3px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #1a1208;
+}
+.target-pill.active {
+  background: #7a1d1d;
+  color: #fff;
+}
+.target-pill.hero { border-color: #5a1010; }
+.target-pill.citizen { border-color: #3a2308; border-style: dashed; }
+
+.flow-step {
+  background: #fdf5dd;
+  border-left: 5px solid #7a1d1d;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border-radius: 0 4px 4px 0;
+}
+.flow-step .step-num {
+  display: inline-block;
+  background: #7a1d1d; color: #fff;
+  width: 22px; height: 22px;
+  text-align: center; line-height: 22px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 12px;
+  margin-right: 8px;
+}
+.flow-step.done {
+  background: #e0f0d8;
+  border-left-color: #2d5a2d;
+}
+.flow-step.done .step-num { background: #2d5a2d; }
+
+.banked-effect {
+  display: inline-block;
+  background: #1a4060;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin: 3px;
+  font-size: 12.5px;
+  font-weight: bold;
+}
+.banked-effect button {
+  background: #cce0f0;
+  color: #1a4060;
+  border: none;
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-left: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 11px;
+}
+.banked-effect button:hover { background: #fff; }
+
+/* ============ SETUP WIZARD ============ */
+.wizard-step {
+  background: #fdf5dd;
+  border: 2px solid #c9a24a;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin: 10px 0;
+}
+.wizard-step h3 { margin-top: 0; }
+.checklist {
+  background: #2a1a0a;
+  color: #f0c870;
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 10px 0;
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.checklist .check { color: #f0c870; margin-right: 6px; }
+.checklist b { color: #f0c870; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+  .hub-header h1 { font-size: 24px; }
+  .module h2 { font-size: 20px; }
+  .topbar { font-size: 12px; }
+  .topbar .title { font-size: 13px; padding: 3px 8px; }
+  .topbar .stat .val { font-size: 14px; }
+  .eyestalk-grid { grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .eyestalk { padding: 5px 3px; font-size: 11px; }
+  .eyestalk .name { font-size: 9px; }
+  .dice-display .die-face { width: 54px; height: 54px; line-height: 54px; font-size: 26px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="title" onclick="nav('hub')">⚔ Horrified D&amp;D</div>
+  <div class="stat">
+    <span class="label">Terror</span>
+    <button onclick="adjust('terror',-1)">−</button>
+    <span class="val" id="t-terror">0</span>
+    <button onclick="adjust('terror',1)">+</button>
+  </div>
+  <div class="stat">
+    <span class="label">Deck</span>
+    <button onclick="adjust('deck',-1)">−</button>
+    <span class="val" id="t-deck">30</span>
+    <button onclick="adjust('deck',1)">+</button>
+  </div>
+  <div class="stat" id="t-frenzy-wrap" style="display:none; cursor:pointer" onclick="cycleFrenzy()" title="Tap to pass Frenzy to next Monster">
+    <span class="label">Frenzy ↻</span>
+    <span class="val" id="t-frenzy">—</span>
+  </div>
+  <div class="alert" id="t-alert" style="display:none"></div>
+  <div class="spacer"></div>
+  <button class="home-btn" onclick="nav('hub')">⌂ Hub</button>
+</div>
+
+<!-- ============ HUB ============ -->
+<section id="m-hub" class="module active">
+  <div class="hub-header">
+    <h1>New Player Toolkit</h1>
+    <div class="sub">Tap a tile to open. Pace tracker stays pinned at the top.</div>
+  </div>
+  <div class="hub-grid">
+    <div class="tile" onclick="nav('m1')">
+      <div class="icon">🧭</div>
+      <div class="num">Module 1</div>
+      <div class="name">Turn Coach</div>
+      <div class="desc">Lost mid-turn? Start here. Walks you to the right rule.</div>
+      <div class="tier">Essential</div>
+    </div>
+    <div class="tile" onclick="nav('m2')">
+      <div class="icon">🃏</div>
+      <div class="num">Module 2</div>
+      <div class="name">Monster Card Walker</div>
+      <div class="desc">Resolve a drawn card in 3 steps: Items → Event → Attack.</div>
+      <div class="tier">Essential</div>
+    </div>
+    <div class="tile" onclick="nav('m3')">
+      <div class="icon">⚔</div>
+      <div class="num">Module 3</div>
+      <div class="name">Attack Resolver</div>
+      <div class="desc">POW before HIT, target priority, defense options.</div>
+      <div class="tier">Essential</div>
+    </div>
+    <div class="tile" onclick="nav('m4')">
+      <div class="icon">🦸</div>
+      <div class="num">Module 4</div>
+      <div class="name">Hero Reference</div>
+      <div class="desc">Pick your Hero. Roll d20. Bank effects. Stays on your phone.</div>
+      <div class="tier">Essential</div>
+    </div>
+    <div class="tile" onclick="nav('m5')">
+      <div class="icon">🎯</div>
+      <div class="num">Module 5</div>
+      <div class="name">Movement Compass</div>
+      <div class="desc">Who does the monster move toward? Heroes beat Citizens.</div>
+      <div class="tier">Useful</div>
+    </div>
+    <div class="tile" onclick="nav('m6')">
+      <div class="icon">👁</div>
+      <div class="num">Module 6</div>
+      <div class="name">Eye Ray Tracker</div>
+      <div class="desc">Beholder d20 lookup + persistent eyestalk damage.</div>
+      <div class="tier">Essential</div>
+    </div>
+    <div class="tile" onclick="nav('m7')">
+      <div class="icon">📜</div>
+      <div class="num">Module 7</div>
+      <div class="name">Monster Mats</div>
+      <div class="desc">All 5 monsters: Step 1 Advance, Step 2 Defeat, notes.</div>
+      <div class="tier">Essential</div>
+    </div>
+    <div class="tile" onclick="nav('m8')">
+      <div class="icon">🎒</div>
+      <div class="num">Module 8</div>
+      <div class="name">Item Lookup</div>
+      <div class="desc">All items filterable by color, shape, strength, location. Strength calc included.</div>
+      <div class="tier">Useful</div>
+    </div>
+    <div class="tile" onclick="nav('m9')">
+      <div class="icon">🗝</div>
+      <div class="num">Module 9</div>
+      <div class="name">Lair Helper</div>
+      <div class="desc">4 lairs · reveal cost · track revealed/blank state.</div>
+      <div class="tier">Nice</div>
+    </div>
+    <div class="tile" onclick="nav('m10')">
+      <div class="icon">📋</div>
+      <div class="num">Module 10</div>
+      <div class="name">Setup Wizard</div>
+      <div class="desc">Pick player count, get a setup checklist for your first game.</div>
+      <div class="tier">Useful</div>
+    </div>
+    <div class="tile" onclick="nav('m11')">
+      <div class="icon">📖</div>
+      <div class="num">Module 11</div>
+      <div class="name">Glossary</div>
+      <div class="desc">A–Z of every rule term. Searchable.</div>
+      <div class="tier">Nice</div>
+    </div>
+    <div class="tile" onclick="resetState()">
+      <div class="icon">♻</div>
+      <div class="num">Reset</div>
+      <div class="name">New Game</div>
+      <div class="desc">Wipe all tracked state (terror, eyestalks, lairs, banked effects, etc.)</div>
+      <div class="tier">Utility</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODULE 1: TURN COACH ============ -->
+<section id="m-m1" class="module">
+  <h2>🧭 Turn Coach</h2>
+  <div class="blurb">Tap where you are in your turn. Walks you to the right rule.</div>
+  <div id="tc-root"></div>
+</section>
+
+<!-- ============ MODULE 2: CARD WALKER ============ -->
+<section id="m-m2" class="module">
+  <h2>🃏 Monster Card Walker</h2>
+  <div class="blurb">Just drew a card? Walk through Items → Event → Attack.</div>
+  <div id="cw-root"></div>
+</section>
+
+<!-- ============ MODULE 3: ATTACK RESOLVER ============ -->
+<section id="m-m3" class="module">
+  <h2>⚔ Attack Resolver</h2>
+  <div class="blurb">Resolves POW before HIT and surfaces defense options. Order matters.</div>
+  <div id="ar-root"></div>
+</section>
+
+<!-- ============ MODULE 4: HERO REFERENCE ============ -->
+<section id="m-m4" class="module">
+  <h2>🦸 Hero Reference</h2>
+  <div class="blurb">Pick the Hero you're playing. Roll d20. Bank effects when relevant.</div>
+  <div id="hr-root"></div>
+</section>
+
+<!-- ============ MODULE 5: MOVEMENT COMPASS ============ -->
+<section id="m-m5" class="module">
+  <h2>🎯 Movement Compass</h2>
+  <div class="blurb">"Who does this Monster move toward?" — the rules, with a checker.</div>
+  <div id="mc-root"></div>
+</section>
+
+<!-- ============ MODULE 6: EYE RAY TRACKER ============ -->
+<section id="m-m6" class="module">
+  <h2>👁 Eye Ray Tracker</h2>
+  <div class="blurb">Roll d20 → look up the ray. Tap eyestalks to mark damaged. Defeat unlocks at 10.</div>
+  <div id="er-root"></div>
+</section>
+
+<!-- ============ MODULE 7: MONSTER MATS ============ -->
+<section id="m-m7" class="module">
+  <h2>📜 Monster Mat Browser</h2>
+  <div class="blurb">All 5 D&amp;D monsters. Objective, Power, Step 1 Advance, Step 2 Defeat.</div>
+  <div id="mm-root"></div>
+</section>
+
+<!-- ============ MODULE 8: ITEM LOOKUP ============ -->
+<section id="m-m8" class="module">
+  <h2>🎒 Item Lookup</h2>
+  <div class="blurb">Filter by color, shape, strength, or location. Tap items to sum their Strength.</div>
+  <div id="il-root"></div>
+</section>
+
+<!-- ============ MODULE 9: LAIR HELPER ============ -->
+<section id="m-m9" class="module">
+  <h2>🗝 Lair Helper</h2>
+  <div class="blurb">4 starting Lair locations. Reveal cost: <b>3+ Strength of any color(s)</b> at the location.</div>
+  <div id="lh-root"></div>
+</section>
+
+<!-- ============ MODULE 10: SETUP WIZARD ============ -->
+<section id="m-m10" class="module">
+  <h2>📋 Setup Wizard</h2>
+  <div class="blurb">Answer a few questions, get a printable checklist.</div>
+  <div id="sw-root"></div>
+</section>
+
+<!-- ============ MODULE 11: GLOSSARY ============ -->
+<section id="m-m11" class="module">
+  <h2>📖 Glossary</h2>
+  <div class="blurb">A–Z of game terms. Search to filter.</div>
+  <input type="text" class="glossary-search" id="gloss-search" placeholder="Search… (e.g. POW, Frenzy, Lair)">
+  <dl class="glossary-list" id="gloss-list"></dl>
+</section>
+
+<script>
+/* ============================================================
+   STATE MANAGEMENT
+   ============================================================ */
+const DEFAULT_STATE = {
+  selectedHero: null,
+  monstersInPlay: ['displacerBeast','beholder'],
+  frenzyHolder: 'displacerBeast',
+  eyestalks: [],           // damaged bands, e.g. ["2-3","8-9"]
+  lairs: {
+    'Skull Island':'hidden',
+    'Dragon\u2019s Platform':'hidden',
+    'Obelisk of the Eye':'hidden',
+    'Abandoned Camp':'hidden'
+  },
+  terror: 0,
+  deck: 30,
+  bankedEffects: [],       // [{hero, name, source}]
+  displacerItems: 0,
+  redDragonStep: 1,
+  mimicOnBoard: false
+};
+
+let state = {};
+function loadState() {
+  try {
+    const raw = localStorage.getItem('hd5e-toolkit-v1');
+    if (raw) state = Object.assign({}, DEFAULT_STATE, JSON.parse(raw));
+    else state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  } catch (e) { state = JSON.parse(JSON.stringify(DEFAULT_STATE)); }
+}
+function saveState() {
+  try { localStorage.setItem('hd5e-toolkit-v1', JSON.stringify(state)); } catch (e) {}
+}
+function resetState() {
+  if (!confirm('Wipe all tracked state and start fresh?')) return;
+  state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  saveState();
+  renderTopbar();
+  renderAll();
+  nav('hub');
+}
+
+/* ============================================================
+   DATA
+   ============================================================ */
+const HEROES = {
+  fighter: {
+    name:'Fighter', icon:'⚔', start:'Hall of Heroes', actions:4,
+    level:'Beginner-friendly',
+    bands:[
+      {range:'1',     text:'No effect.'},
+      {range:'2-8',   text:'Immediately move to the nearest Monster\u2019s location.'},
+      {range:'9-15',  text:'During the Monster Phase, ignore all HIT results rolled by 1 Monster attack.', bank:true, bankName:'Ignore HITs (1 attack)'},
+      {range:'16-19', text:'Do not draw a Monster card this turn.'},
+      {range:'20',    text:'Gain 2 more actions this turn. Gain a Perk card.'}
+    ]
+  },
+  cleric: {
+    name:'Cleric', icon:'✚', start:'Castle Waterdeep', actions:4,
+    level:'Beginner-friendly',
+    bands:[
+      {range:'1',     text:'No effect.'},
+      {range:'2-8',   text:'During the Monster Phase, if a Hero is defeated, do not move the Terror Marker. Instead, move the Hero to your location.', bank:true, bankName:'Save defeated Hero (no Terror)'},
+      {range:'9-15',  text:'During the Monster Phase, re-roll 1 die with a Hit or Power result.', bank:true, bankName:'Re-roll 1 Monster die'},
+      {range:'16-19', text:'During the Monster Phase, re-roll all dice with a Hit or Power result.', bank:true, bankName:'Re-roll ALL Hit/POW dice'},
+      {range:'20',    text:'During the Monster Phase, all Monster Attacks this turn use only 1 die. Gain a Perk card.', bank:true, bankName:'Monster attacks use 1 die'}
+    ]
+  },
+  bard: {
+    name:'Bard', icon:'♪', start:'The Yawning Portal: Taproom', actions:4,
+    level:'Beginner-friendly',
+    bands:[
+      {range:'1',     text:'No effect.'},
+      {range:'2-8',   text:'Move all Citizens up to 2 locations toward you.'},
+      {range:'9-15',  text:'Move all Heroes up to 2 locations toward you.'},
+      {range:'16-19', text:'Move Monsters 2 locations away from you.'},
+      {range:'20',    text:'Move any Citizen or Hero to your location. Gain a Perk card.'}
+    ]
+  },
+  wizard: {
+    name:'Wizard', icon:'✪', start:'Blackstaff Tower', actions:4,
+    level:'Tricky — teleport always works',
+    bands:[
+      {range:'1',     text:'No effect.'},
+      {range:'2-8',   text:'Roll d20: move any Hero to that numbered location.'},
+      {range:'9-15',  text:'Roll d20: move any Monster to that location (Red Dragon \u2192 goes to a Lair instead).'},
+      {range:'16-19', text:'Move any Hero to any Location.'},
+      {range:'20',    text:'Move yourself to any location. Gain a Perk card.'}
+    ]
+  },
+  rogue: {
+    name:'Rogue', icon:'🗡', start:'The Sword and Sextant', actions:4,
+    level:'Planning-heavy',
+    bands:[
+      {range:'1',     text:'No effect.'},
+      {range:'2-8',   text:'Take 2 Items from the nearest location.'},
+      {range:'9-15',  text:'Share Items with any and all Heroes (any distance).'},
+      {range:'16-19', text:'Take 2 Items from the discard pile.'},
+      {range:'20',    text:'Take 3 Items from the Horrified Haversack. Gain a Perk card.'}
+    ]
+  }
+};
+
+const MONSTERS = {
+  displacerBeast: {
+    name:'Displacer Beast', frenzy:1, hasLair:false,
+    objective:'Determine Displacer Beast\u2019s true location, then vanquish it.',
+    power:'Displacement: Move Displacer Beast to the next-closest Hero. That Hero will take any Hits from the Displacer Beast on this turn.',
+    advance:'At Displacer Beast\u2019s location, place an Item on a spot on the mat. The Item\u2019s Strength must equal the amount of numbers covered (1, 2 or 3). Once at least 5 Items are placed, you may attempt to Strike.',
+    defeat:'At Displacer Beast\u2019s location, discard 7+ Strength of Red (Weapon) or Yellow (Mundane) Items and roll d20. If the result is covered by an Item, defeated. If not, move one Item to a different spot. Roll 1: discard a placed Item. Roll 20: instant defeat, gain a Perk card and an extra action.',
+    notes:[
+      'Strength 1 Items go only on the top row (1-number spots). Strength 2 cover 2 numbers. Strength 3+ go on any spot.',
+      'Strength 4, 5, or 6 Items can go on any spot.',
+      'Five Items placed allows Defeat in the same Hero Phase as the fifth placement.',
+      'All Items on the mat are discarded when the Beast is defeated.'
+    ]
+  },
+  mimic: {
+    name:'Mimic', frenzy:5, hasLair:false,
+    objective:'Find Mimic and defeat it quickly.',
+    power:'Scavenger: Remove the highest Strength Item from the location nearest to the Hero of the current player.',
+    advance:'Move per Monster Attack on its mat. If Mimic passes or stops on a Chest icon, draw an Item. If all Heroes have a matching color Item, discard those Items and Mimic appears at the active player\u2019s location. Otherwise, Terror +1 and Mimic stays on its path. Discard the drawn Item.',
+    defeat:'Once Mimic appears on the gameboard, at Mimic\u2019s location discard 6+ Strength of Blue (Magical) Items to defeat it.',
+    notes:[
+      'Mimic begins the game on its Monster mat, not on the gameboard.',
+      'Mimic can be the Frenzied Monster even while on its mat.',
+      'While Mimic is on its mat: Perk cards do not affect it AND Monster card Events do not affect it.',
+      'Monster card movement DOES move Mimic along its mat path.'
+    ]
+  },
+  beholder: {
+    name:'Beholder', frenzy:4, hasLair:false,
+    objective:'Damage Beholder\u2019s eyestalks, then blind its central antimagic eye to defeat it.',
+    power:'Eye Ray: Roll d20 and check the Eye Ray table. If the rolled eyestalk is undamaged, that ray fires. If damaged, the antimagic eye fires instead and all Heroes with Items discard 1 Item.',
+    advance:'At Beholder\u2019s location, discard any Item and roll d20. Roll 1: miss. 2\u201315: damage 1 eyestalk of your choice. 16\u201319: damage up to 2. 20: damage up to 3, retrieve the discarded Item, gain a Perk.',
+    defeat:'Once all 10 eyestalks are damaged, at Beholder\u2019s location discard 6+ Strength of Blue (Magical) Items to blind the antimagic eye.',
+    notes:[
+      'Players can discuss which eyestalk to disable when taking an Advance action.',
+      'Beholder\u2019s own Eye Ray roll of 20 does NOT grant a Perk card.',
+      'The Cleric\u2019s re-roll abilities can rescue you from bad Eye Ray rolls.'
+    ]
+  },
+  redDragon: {
+    name:'Red Dragon', frenzy:6, hasLair:true,
+    objective:'Claim the Orb of Dragonkind, lure Red Dragon to its Hoard, then defeat it.',
+    power:'Fire Breath: Every Hero AND Citizen in Red Dragon\u2019s location is hit. (The only attack that hits both at once.)',
+    advance:'Step 1 (Vault of the Orb of Dragonkind): At the Vault, discard an Item to move same-colored obstacles any number of spaces. Collect the Orb when moved to the Vault Exit. Step 2 (Lure): At Red Dragon\u2019s Hoard, use an action to draw 1 Item; Dragon moves toward its Hoard a number of locations equal to that Item\u2019s Strength (you may Lure without holding the Orb). Step 3 (Surround): While Dragon is in the Hoard, place an Item or the Orb in indicated spots. Once all 3 Items + Orb are placed, proceed to Step 4.',
+    defeat:'Step 4 (Destroy): While Red Dragon is in the Hoard, roll d20 and add Strengths of placed Items. Total 20+ defeats it. Otherwise, discard 1 placed Item and return to Step 3.',
+    notes:[
+      'Red Dragon CANNOT enter Waterdeep (the gold city icon). If all characters are in Waterdeep, Red Dragon does not move.',
+      'Red Dragon cannot be teleported to Waterdeep. The Wizard\u2019s teleport sends Red Dragon to its starting Lair instead.',
+      'It takes 1 Move action each way to enter/leave the Hoard.',
+      'Monsters in the main board can move into the Hoard if a Hero is there.',
+      'The Hoard counts as a single location for monster attacks targeting Heroes there.'
+    ]
+  }
+};
+
+const EYE_RAYS = [
+  {band:'1',     name:'MISS',           effect:'Lucky! The eye attack misses. No effect.'},
+  {band:'2-3',   name:'CHARM RAY',      effect:'Place a Citizen in the Beholder\u2019s location.'},
+  {band:'4-5',   name:'PARALYZING RAY', effect:'Discard 1 Item, OR current player cannot use Move actions next turn.'},
+  {band:'6-7',   name:'FEAR RAY',       effect:'All Heroes and Citizens move 1 location away from Beholder.'},
+  {band:'8-9',   name:'SLOWING RAY',    effect:'Discard 1 Item, OR current player has 1 fewer action their next turn.'},
+  {band:'10-11', name:'ENERVATION RAY', effect:'Any player with more than 2 Items must discard down to 2 Items.'},
+  {band:'12-13', name:'TELEKINETIC RAY',effect:'Per the Eye Ray Reference Card (12\u201320 on opposite side).'},
+  {band:'14-15', name:'SLEEP RAY',      effect:'Per the Eye Ray Reference Card.'},
+  {band:'16-17', name:'PETRIFICATION RAY', effect:'Per the Eye Ray Reference Card.'},
+  {band:'18-19', name:'DISINTEGRATION RAY', effect:'Per the Eye Ray Reference Card.'},
+  {band:'20',    name:'DEATH RAY',      effect:'Per the Eye Ray Reference Card. The bad one.'}
+];
+
+const ITEMS = [
+  {name:'Dagger',       str:2, type:'weapon',  loc:'House of Wonder'},
+  {name:'Quarterstaff', str:3, type:'weapon',  loc:'Blackstaff Tower'},
+  {name:'Longsword',    str:4, type:'weapon',  loc:'Trollskull Manor'},
+  {name:'Whip',         str:2, type:'weapon',  loc:'Goblin Bazaar'},
+  {name:'Halberd',      str:5, type:'weapon',  loc:'Dead Man\u2019s Corner'},
+  {name:'Morningstar',  str:4, type:'weapon',  loc:'Abandoned Priory'},
+  {name:'Mace',         str:3, type:'weapon',  loc:'Castle Waterdeep'},
+  {name:'Long Bow',     str:5, type:'weapon',  loc:'Hall of Heroes'},
+  {name:'Staff',        str:2, type:'weapon',  loc:'Trollskull Manor'},
+  {name:'Wand',         str:4, type:'magical', loc:'Wyllow\u2019s Tower'},
+  {name:'Spellbook',    str:3, type:'magical', loc:'Dragon\u2019s Platform'},
+  {name:'Holy Symbol',  str:2, type:'magical', loc:'Altar to Juiblex'},
+  {name:'Amulet',       str:2, type:'magical', loc:'Abandoned Priory'},
+  {name:'Ring',         str:3, type:'magical', loc:'Castle Waterdeep'},
+  {name:'Focus',        str:3, type:'magical', loc:'Altar to Juiblex'},
+  {name:'Rod',          str:3, type:'magical', loc:'Abandoned Camp'},
+  {name:'Lantern',      str:3, type:'mundane', loc:'Castle Waterdeep'},
+  {name:'Rations',      str:2, type:'mundane', loc:'Ahghairon\u2019s Tower'},
+  {name:'Candle',       str:1, type:'mundane', loc:'Ahghairon\u2019s Tower'},
+  {name:'Torch',        str:2, type:'mundane', loc:'Abandoned Priory'},
+  {name:'Pouch',        str:2, type:'mundane', loc:'Abandoned Camp'},
+  {name:'Shovel',       str:3, type:'mundane', loc:'Dragon\u2019s Platform'},
+  {name:'Caltrops',     str:1, type:'mundane', loc:'Obelisk of the Eye'},
+  {name:'Potion',       str:2, type:'mundane', loc:'The Yawning Portal: Taproom'}
+];
+
+const GLOSSARY = [
+  ['Advance','Use Items to progress a Monster\u2019s Step 1 challenge on its mat. You must complete Step 1 before you can Defeat.'],
+  ['Antimagic Eye','Beholder\u2019s central eye. If a rolled eyestalk band is already damaged, the antimagic eye fires instead: every Hero with Items discards 1.'],
+  ['Banked Effect','Cleric/Fighter d20 results trigger during Monster Phase. Each is a one-shot stored in your bank, cleared at end of Monster Phase.'],
+  ['Citizen','NPCs on the board. Hit by a Monster = instantly removed and Terror +1. Cannot defend with Items. Reach their safe location = Hero who delivered them draws a Perk.'],
+  ['Critical Failure','A d20 result of 1. No effect (unless a Perk card adjusts).'],
+  ['Defeat (Hero)','When a Hero takes a hit they can\u2019t/won\u2019t defend: removed from board, Terror +1, return next turn at Yawning Portal: Taproom with full actions, keeping Items and Perks.'],
+  ['Defeat (Monster)','Use Items per the Monster\u2019s Step 2 to remove it. Lowers Terror by 1. Must complete Step 1 first.'],
+  ['Discard (Item)','Remove from hand. Refilled when the Haversack runs out.'],
+  ['Frenzy / Frenzy Marker','The Monster with the marker is the "Frenzied" monster. When a Frenzy icon appears on a Monster card, the frenzied monster moves and attacks (may double-act if it also matches another icon).'],
+  ['Guide','Action: move 1 Citizen between your location and an adjacent one.'],
+  ['Haversack','The bag holding the 60 Item tokens. When empty, refill from discards and shake.'],
+  ['Hero Phase','First half of your turn. Take up to your # actions in any order. Perk cards may be played any time.'],
+  ['HIT','Monster die symbol. Each HIT requires the target to discard 1 Item or be defeated.'],
+  ['Lair','Hidden Monster home. 4 placed facedown at game start. Reveal by discarding 3+ Strength of any colors at the location. Blank Lairs stay in place (D&D standard rules).'],
+  ['Monster Phase','Second half of your turn. Draw 1 Monster card. Resolve Items → Event → Attack, top to bottom.'],
+  ['Move','Action: walk to an adjacent location. Citizens at your spot may come along. Teleport Circles and the 2 secret passages count as one Move.'],
+  ['Perk Card','Bonus effect, played by anyone on anyone\u2019s Hero Phase, free (no action). Some require a d20 mechanic to function.'],
+  ['Pick Up','Action: take any number of Items at your location.'],
+  ['POW','Monster die symbol. Resolves the monster\u2019s unique Power. ALWAYS resolves BEFORE HIT on the same attack.'],
+  ['Reveal Lair','Action: at the Lair\u2019s location, spend 3+ Strength of any color(s) to flip it.'],
+  ['Share','Action: all Heroes at the same location exchange Items freely. You don\u2019t have to be one of the trading parties.'],
+  ['Special Action','Roll the d20 and apply your Hero\u2019s tile result band. Can be taken multiple times per Hero Phase (each costs one action).'],
+  ['Strength','The number on an Item. Sum multiple Items together to meet a requirement.'],
+  ['Teleportation Circle','4 circles + 2 secret passages (Castle Corkscrew↔Skullport Gate, Yawning Portal: The Well↔Entry Well). One Move action links any two.'],
+  ['Terror Level','Increases when Heroes are defeated or Citizens die; decreases when Monsters are defeated. Max = lose.'],
+  ['Waterdeep','The upper section of the board. Dragons CANNOT enter Waterdeep — if all characters are there, Red Dragon does not move.']
+];
+
+/* ============================================================
+   NAV / TOP BAR
+   ============================================================ */
+function nav(id) {
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+  const target = document.getElementById('m-' + id);
+  if (target) target.classList.add('active');
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+function adjust(stat, delta) {
+  if (stat === 'terror') {
+    state.terror = Math.max(0, Math.min(6, state.terror + delta));
+  } else if (stat === 'deck') {
+    state.deck = Math.max(0, Math.min(30, state.deck + delta));
+  }
+  saveState();
+  renderTopbar();
+}
+
+function renderTopbar() {
+  document.getElementById('t-terror').textContent = state.terror;
+  document.getElementById('t-deck').textContent = state.deck;
+  if (state.frenzyHolder && MONSTERS[state.frenzyHolder]) {
+    document.getElementById('t-frenzy').textContent = MONSTERS[state.frenzyHolder].name;
+    document.getElementById('t-frenzy-wrap').style.display = '';
+  } else {
+    document.getElementById('t-frenzy-wrap').style.display = 'none';
+  }
+  // Heuristic alerts
+  const alert = document.getElementById('t-alert');
+  let msg = null;
+  if (state.terror >= 4) msg = '⚠ Terror is high — push for a Defeat soon.';
+  else if (state.deck <= 8 && state.terror <= 2) msg = '⚠ Deck thin — go for kills.';
+  else if (state.terror >= 5) msg = '⚠ Terror 5! One more and you lose.';
+  if (msg) { alert.textContent = msg; alert.style.display = ''; }
+  else alert.style.display = 'none';
+}
+
+/* ============================================================
+   M1: TURN COACH
+   ============================================================ */
+function renderTC(view) {
+  const root = document.getElementById('tc-root');
+  if (!view) view = 'start';
+
+  const back = `<button class="secondary" onclick="renderTC('start')">← Back to start</button>`;
+
+  if (view === 'start') {
+    root.innerHTML = `
+      <div class="card">
+        <h3 style="margin-top:0">Where are you right now?</h3>
+        <button class="choice" onclick="renderTC('hero')">🦸 It\u2019s my Hero Phase
+          <span class="sub">I have actions to spend. Show me my 8 options.</span></button>
+        <button class="choice" onclick="renderTC('drew')">🃏 I just drew a Monster card
+          <span class="sub">Walk me through resolving it.</span></button>
+        <button class="choice" onclick="renderTC('attacked')">⚔ A Monster is attacking me/someone
+          <span class="sub">Help me resolve the dice.</span></button>
+        <button class="choice" onclick="renderTC('start_turn')">🕐 It\u2019s the start of my turn — what do I do?
+          <span class="sub">Refresher on turn structure.</span></button>
+      </div>
+    `;
+    return;
+  }
+
+  if (view === 'start_turn') {
+    root.innerHTML = `
+      ${back}
+      <div class="card">
+        <h3>Each turn has two parts</h3>
+        <ol class="tight">
+          <li><b>Hero Phase</b> — take up to your # actions (most heroes have 4). Any player may play any number of Perk cards at any time.</li>
+          <li><b>Monster Phase</b> — draw 1 Monster card. Resolve <b>Items → Event → Attack</b> top to bottom.</li>
+        </ol>
+        <p class="muted">After your Monster Phase ends, play passes clockwise.</p>
+        <button class="primary" onclick="renderTC('hero')">→ Show me my Hero Phase options</button>
+      </div>
+    `;
+    return;
+  }
+
+  if (view === 'hero') {
+    root.innerHTML = `
+      ${back}
+      <div class="card">
+        <h3>Hero Phase — Pick an Action</h3>
+        <p class="muted">Repeat any action any number of times. Order doesn\u2019t matter.</p>
+        <button class="choice" onclick="renderTC('a_move')">🚶 Move <span class="sub">Walk to an adjacent location. Teleport circles count as one Move.</span></button>
+        <button class="choice" onclick="renderTC('a_guide')">🧭 Guide <span class="sub">Move 1 Citizen one location.</span></button>
+        <button class="choice" onclick="renderTC('a_pickup')">📦 Pick Up <span class="sub">Take any number of Items at your location.</span></button>
+        <button class="choice" onclick="renderTC('a_share')">🤝 Share <span class="sub">Heroes at the same location swap Items freely.</span></button>
+        <button class="choice" onclick="renderTC('a_advance')">⏩ Advance <span class="sub">Spend Items to progress a Monster\u2019s Step 1.</span></button>
+        <button class="choice" onclick="renderTC('a_defeat')">💀 Defeat <span class="sub">Spend Items to KO a Monster (Step 2).</span></button>
+        <button class="choice" onclick="renderTC('a_special')">🎲 Special Action <span class="sub">Roll d20 and apply your Hero\u2019s tile result.</span></button>
+        <button class="choice" onclick="renderTC('a_reveal')">🔮 Reveal a Lair <span class="sub">Discard 3+ Strength of any color(s) at the Lair location.</span></button>
+      </div>
+    `;
+    return;
+  }
+
+  const actions = {
+    a_move: {
+      title:'Move',
+      body:`<p>Walk to an <b>adjacent</b> location. Any number of Citizens at your location may come with you.</p>
+        <p><b>Teleportation Circles &amp; secret passages</b> count as one Move — you can hop between any two circles, or between Castle Corkscrew ↔ Skullport Gate, or between The Yawning Portal: The Well ↔ Entry Well.</p>
+        <p class="rust-text">Ending your turn in a Monster\u2019s location = you\u2019re likely getting attacked next phase.</p>`
+    },
+    a_guide: {
+      title:'Guide',
+      body:`<p>Move <b>one Citizen</b> between your location and an adjacent location.</p>
+        <p>Note: Citizens can be Guided <i>to</i> a Teleport Circle but Heroes can\u2019t Guide them <i>through</i> one — only Move can take a Citizen through a circle.</p>`
+    },
+    a_pickup: {
+      title:'Pick Up',
+      body:`<p>Take <b>any number</b> of Items at your location.</p>
+        <p class="rust-text">Pick up Items early. You need them to Advance, Defeat, AND defend against Hits (1 Item per HIT).</p>`
+    },
+    a_share: {
+      title:'Share',
+      body:`<p>All Heroes at the same location may exchange Items freely. No 1-for-1 required, and you don\u2019t even have to be involved in the trade.</p>`
+    },
+    a_advance: {
+      title:'Advance',
+      body:`<p>Spend Items to progress a Monster\u2019s <b>Step 1 challenge</b>. Each Monster has unique rules.</p>
+        <button class="primary" onclick="nav('m7')">→ Open Monster Mats</button>`
+    },
+    a_defeat: {
+      title:'Defeat',
+      body:`<p>Spend Items to KO a Monster. You must have completed Step 1 first.</p>
+        <p>Defeating a Monster lowers Terror by 1.</p>
+        <button class="primary" onclick="nav('m7')">→ Open Monster Mats</button>`
+    },
+    a_special: {
+      title:'Special Action',
+      body:`<p>Roll the d20 and apply the band on your Hero\u2019s tile.</p>
+        <ul class="tight">
+          <li><b>Roll 20 in Hero Phase</b> (even via Perk) → gain a Perk card.</li>
+          <li><b>Roll 1</b> → no effect (unless a Perk adjusts it).</li>
+          <li>Cleric and Fighter may "bank" certain results to use during the Monster Phase.</li>
+        </ul>
+        <button class="primary" onclick="nav('m4')">→ Open Hero Reference</button>`
+    },
+    a_reveal: {
+      title:'Reveal a Lair',
+      body:`<p>At a Lair token\u2019s location, discard Items totaling <b>3+ Strength</b> in <b>any colors</b>.</p>
+        <p>Flip the token. If blank, no Monster lives there — but the token stays put.</p>
+        <button class="primary" onclick="nav('m9')">→ Open Lair Helper</button>`
+    }
+  };
+
+  if (actions[view]) {
+    const a = actions[view];
+    root.innerHTML = `
+      ${back}
+      <div class="card">
+        <h3 style="margin-top:0">${a.title}</h3>
+        ${a.body}
+      </div>
+    `;
+    return;
+  }
+
+  if (view === 'drew') {
+    root.innerHTML = `
+      ${back}
+      <div class="card">
+        <h3 style="margin-top:0">Monster card resolution</h3>
+        <p>Resolve the 3 sections of the card <b>top to bottom</b>:</p>
+        <ol class="tight">
+          <li><b>Items</b> — draw N from Haversack and place at the locations printed on each.</li>
+          <li><b>Event</b> — read aloud. <b>Ignore if its color icon belongs to a Monster not in your game.</b></li>
+          <li><b>Attack</b> — resolve icons left to right.</li>
+        </ol>
+        <button class="primary" onclick="nav('m2')">→ Open Card Walker</button>
+      </div>
+    `;
+    return;
+  }
+
+  if (view === 'attacked') {
+    root.innerHTML = `
+      ${back}
+      <div class="card">
+        <h3 style="margin-top:0">Resolving an attack</h3>
+        <p>Three rules new players miss:</p>
+        <ul class="tight">
+          <li><b>POW resolves BEFORE HIT</b> on the same attack.</li>
+          <li>Monster targets the <b>closest character</b>. On ties, <b>Hero beats Citizen</b>. Multi-Hero ties: active player picks.</li>
+          <li>Each HIT can be defended by <b>discarding 1 Item</b>. Out of Items? Hero is defeated.</li>
+        </ul>
+        <button class="primary" onclick="nav('m3')">→ Open Attack Resolver</button>
+      </div>
+    `;
+    return;
+  }
+}
+
+/* ============================================================
+   M2: CARD WALKER
+   ============================================================ */
+let cwState = {step:1, items:1, eventColor:'', eventMatch:null};
+function renderCW(reset) {
+  if (reset) cwState = {step:1, items:1, eventColor:'', eventMatch:null};
+  const root = document.getElementById('cw-root');
+  const monstersInPlay = state.monstersInPlay.map(id => MONSTERS[id]?.name).filter(Boolean);
+
+  root.innerHTML = `
+    <div class="card-info">
+      <b>Monsters in play:</b> ${monstersInPlay.length ? monstersInPlay.join(', ') : '<i>none configured</i>'} <span class="cite">(set in Setup Wizard)</span>
+    </div>
+    <div class="flow-step ${cwState.step > 1 ? 'done' : ''}">
+      <span class="step-num">1</span><b>Items</b>
+      ${cwState.step === 1 ? `
+        <p>How many Items does the card show?</p>
+        <input type="number" id="cw-items" min="0" max="5" value="${cwState.items}" style="width:60px"> 
+        <button class="primary" onclick="cwState.items=+document.getElementById('cw-items').value; cwState.step=2; renderCW()">Draw &amp; place →</button>
+      ` : `
+        <p>✓ Drew ${cwState.items} Item(s) from the Haversack. Place each at its printed location. <span class="cite">If Haversack runs empty, reshuffle the discards back in and continue.</span></p>
+      `}
+    </div>
+
+    <div class="flow-step ${cwState.step > 2 ? 'done' : (cwState.step === 2 ? '' : 'muted')}" style="${cwState.step < 2 ? 'opacity:0.5':''}">
+      <span class="step-num">2</span><b>Event</b>
+      ${cwState.step === 2 ? `
+        <p>What color is the Event\u2019s icon?</p>
+        <div>
+          <button class="chip" onclick="cwState.eventColor='yellow'; cwState.step=2.5; renderCW()">🟡 Yellow (Chest)</button>
+          <button class="chip" onclick="cwState.eventColor='purple'; cwState.step=2.5; renderCW()">🟣 Purple (Wand)</button>
+          <button class="chip" onclick="cwState.eventColor='brown'; cwState.step=2.5; renderCW()">🟤 Brown (Hat)</button>
+          <button class="chip" onclick="cwState.eventColor='green'; cwState.step=2.5; renderCW()">🟢 Green (Potion)</button>
+          <button class="chip" onclick="cwState.eventColor='orange'; cwState.step=2.5; renderCW()">🟠 Orange (Sword)</button>
+          <button class="chip" onclick="cwState.eventColor='blue'; cwState.step=2.5; renderCW()">🔵 Blue (Skull)</button>
+          <button class="chip" onclick="cwState.eventColor='teal'; cwState.step=2.5; renderCW()">🟦 Teal (Spellbook)</button>
+          <button class="chip" onclick="cwState.eventColor='red'; cwState.step=2.5; renderCW()">🔴 Red (Shield)</button>
+        </div>
+      ` : cwState.step === 2.5 ? `
+        <p>Event color: <b>${cwState.eventColor}</b>. Does any Monster <b>currently in play</b> share this color icon?</p>
+        <button class="primary" onclick="cwState.eventMatch=true; cwState.step=3; renderCW()">Yes → apply Event</button>
+        <button class="secondary" onclick="cwState.eventMatch=false; cwState.step=3; renderCW()">No → skip Event</button>
+        <p class="cite">If the Event references a monster that\u2019s defeated or not in your game, ignore it.</p>
+      ` : cwState.step > 2.5 ? `
+        <p>✓ Event ${cwState.eventMatch ? 'applied' : 'skipped (no matching monster)'}.</p>
+      ` : `<p class="muted">(complete Step 1 first)</p>`}
+    </div>
+
+    <div class="flow-step ${cwState.step > 3 ? 'done' : (cwState.step === 3 ? '' : 'muted')}" style="${cwState.step < 3 ? 'opacity:0.5':''}">
+      <span class="step-num">3</span><b>Attack</b>
+      ${cwState.step >= 3 ? `
+        <p>Resolve attack icons <b>left to right</b>. For each icon:</p>
+        <ul class="tight">
+          <li><b>Frenzy icon</b> → the monster holding the Frenzy Marker (${state.frenzyHolder ? MONSTERS[state.frenzyHolder]?.name : 'not set'}) moves &amp; attacks.</li>
+          <li><b>Color/symbol icon</b> → any monster matching by <b>color OR shape</b> moves &amp; attacks. Multiple match? Active player picks the order.</li>
+          <li><b>No monster matches</b> → skip that icon.</li>
+        </ul>
+        <p class="cite">A single monster can act twice if both the Frenzy icon AND its color icon appear.</p>
+        <button class="primary" onclick="nav('m3')">→ Open Attack Resolver</button>
+        <button class="secondary" onclick="renderCW(true)">↻ New card</button>
+      ` : `<p class="muted">(complete Step 2 first)</p>`}
+    </div>
+  `;
+}
+
+/* ============================================================
+   M3: ATTACK RESOLVER
+   ============================================================ */
+let arState = {monster:'', dice:[], targets:[], powResolved:false, hitsRemaining:0, log:[]};
+
+function arInit() {
+  arState = {monster:state.monstersInPlay[0]||'displacerBeast', dice:[], targets:[], powResolved:false, hitsRemaining:0, log:[]};
+}
+
+function renderAR() {
+  const root = document.getElementById('ar-root');
+  const m = MONSTERS[arState.monster] || MONSTERS.displacerBeast;
+
+  const diceCounts = {
+    pow: arState.dice.filter(d=>d==='pow').length,
+    hit: arState.dice.filter(d=>d==='hit').length,
+    blank: arState.dice.filter(d=>d==='blank').length
+  };
+
+  root.innerHTML = `
+    <div class="card">
+      <h3 style="margin-top:0">Setup</h3>
+      <div style="margin-bottom:8px">
+        <span class="rust-text">Attacking Monster:</span><br>
+        ${Object.keys(MONSTERS).map(id => `
+          <button class="secondary ${arState.monster===id?'active':''}" onclick="arState.monster='${id}'; renderAR()">${MONSTERS[id].name}</button>
+        `).join('')}
+      </div>
+      <p><b>Power:</b> <span class="muted">${m.power}</span></p>
+      <div>
+        <span class="rust-text">Roll the dice — tap to add:</span><br>
+        <button class="die-pick pow" onclick="arState.dice.push('pow'); renderAR()">⚡</button>
+        <button class="die-pick hit" onclick="arState.dice.push('hit'); renderAR()">✦</button>
+        <button class="die-pick blank" onclick="arState.dice.push('blank'); renderAR()">·</button>
+        <button class="secondary" onclick="arState.dice=[]; renderAR()">Clear</button>
+      </div>
+      <p style="margin-top:8px"><b>Rolled:</b> 
+        ${diceCounts.pow ? `<span class="banked-effect" style="background:#b02020">⚡ POW × ${diceCounts.pow}</span>` : ''}
+        ${diceCounts.hit ? `<span class="banked-effect" style="background:#c9a24a;color:#1a1208">✦ HIT × ${diceCounts.hit}</span>` : ''}
+        ${diceCounts.blank ? `<span class="banked-effect" style="background:#5a3a1a">· Blank × ${diceCounts.blank}</span>` : ''}
+        ${arState.dice.length===0 ? '<i>none yet</i>' : ''}
+      </p>
+    </div>
+
+    ${arState.dice.length > 0 ? `
+      <div class="card-info">
+        <b>Resolution order:</b> POW first (each one), THEN HIT (each one). Blanks miss. If POW moves the target out of the location, remaining HITs miss.
+      </div>
+
+      ${diceCounts.pow > 0 ? `
+        <div class="flow-step">
+          <span class="step-num">1</span><b>Resolve POW × ${diceCounts.pow}</b>
+          <p>${m.power}</p>
+          ${arState.monster==='beholder' ? `<button class="primary" onclick="nav('m6')">→ Open Eye Ray Tracker</button>` : ''}
+          ${arState.monster==='redDragon' ? `<div class="card-warn" style="margin-top:8px"><b>Fire Breath hits Heroes AND Citizens</b> in Red Dragon\u2019s location — this is unique to the Dragon.</div>` : ''}
+        </div>
+      ` : ''}
+
+      ${diceCounts.hit > 0 ? `
+        <div class="flow-step">
+          <span class="step-num">2</span><b>Resolve HIT × ${diceCounts.hit}</b>
+          <p><b>Target selection:</b></p>
+          <ol class="tight">
+            <li>If <b>any Hero</b> is in the Monster\u2019s location → Hero is targeted (active player picks if multiple).</li>
+            <li>Else if a Citizen is there → Citizen is targeted.</li>
+            <li>Else → attack misses (no target).</li>
+          </ol>
+          <p><b>Hero defense:</b> discard 1 Item per HIT. Can\u2019t/won\u2019t → Hero defeated (remove, Terror +1, return next turn at Yawning Portal: Taproom).</p>
+          <p><b>Citizen:</b> instantly defeated (cannot defend with Items). Terror +1.</p>
+        </div>
+      ` : ''}
+
+      <div class="card">
+        <h3 style="margin-top:0">Check banked effects</h3>
+        ${renderBankedEffectsList()}
+        ${state.bankedEffects.length === 0 ? '<p class="muted">No banked effects. Cleric/Fighter d20 results during this turn\u2019s Hero Phase would appear here.</p>' : ''}
+        <p class="cite">All banked effects clear at end of Monster Phase.</p>
+      </div>
+    ` : ''}
+  `;
+}
+
+function renderBankedEffectsList() {
+  if (!state.bankedEffects.length) return '';
+  return state.bankedEffects.map((e,i) => `
+    <span class="banked-effect">${e.name} <button onclick="consumeBanked(${i})">Use</button></span>
+  `).join('');
+}
+function consumeBanked(i) {
+  state.bankedEffects.splice(i,1);
+  saveState();
+  renderAR();
+  renderHR();
+}
+
+/* ============================================================
+   M4: HERO REFERENCE
+   ============================================================ */
+let hrLastRoll = null;
+function renderHR() {
+  const root = document.getElementById('hr-root');
+  const hero = state.selectedHero;
+  const picker = `
+    <div class="card">
+      <h3 style="margin-top:0">Pick your Hero</h3>
+      <div class="hero-picker">
+        ${Object.entries(HEROES).map(([id,h]) => `
+          <div class="hero-pick ${hero===id?'active':''}" onclick="state.selectedHero='${id}'; saveState(); renderHR()">
+            <span class="icon">${h.icon}</span>
+            ${h.name}
+            <span class="lvl">${h.level}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  if (!hero) { root.innerHTML = picker; return; }
+  const h = HEROES[hero];
+
+  root.innerHTML = `
+    ${picker}
+    <div class="hero-sheet">
+      <div class="header">
+        <div>
+          <div class="name">${h.icon} ${h.name}</div>
+          <div class="muted">${h.start} · ${h.actions} actions</div>
+        </div>
+        <div class="meta">
+          <button class="primary" onclick="hrRoll()">🎲 Roll d20</button>
+        </div>
+      </div>
+
+      ${hrLastRoll !== null ? `
+        <div class="dice-display">
+          <div style="color:#e0b860;font-size:11px;text-transform:uppercase">Your roll</div>
+          <div class="die-face">${hrLastRoll}</div>
+          <div style="color:#e0b860;font-size:12px;margin-top:4px">${hrLastRoll===20 ? '★ 20 — gain a Perk card!' : hrLastRoll===1 ? '✗ Critical fail — no effect.' : ''}</div>
+        </div>
+      ` : ''}
+
+      <h3>d20 Result Bands</h3>
+      ${h.bands.map(b => {
+        const matched = hrLastRoll !== null && bandIncludes(b.range, hrLastRoll);
+        return `
+          <div class="band ${matched?'matched':''}">
+            <span class="roll">${b.range}</span>
+            ${b.text}
+            ${b.bank ? `<br><button class="secondary" style="margin-top:5px" onclick="bankEffect('${hero}','${b.bankName}')">+ Bank "${b.bankName}"</button>` : ''}
+          </div>
+        `;
+      }).join('')}
+
+      ${state.bankedEffects.length ? `
+        <h3>Banked effects (use during Monster Phase)</h3>
+        <div>${renderBankedEffectsList()}</div>
+        <p class="cite">Auto-clears at end of Monster Phase. Tap "Use" when consumed.</p>
+      ` : ''}
+
+      <div class="card-warn" style="margin-top:14px">
+        <b>Reminders:</b>
+        <ul class="tight">
+          <li>Rolling 20 in <b>Hero Phase</b> gains a Perk; rolling 20 in <b>Monster Phase</b> does not.</li>
+          ${hero==='wizard' ? '<li><b>Wizard:</b> teleport ALWAYS works — even if no one wants the destination. Red Dragon teleport goes to its starting Lair, not a numbered location.</li>' : ''}
+          ${hero==='cleric' || hero==='fighter' ? '<li>Banked Monster-Phase effects are one-shot. Multiple of the same effect can stack.</li>' : ''}
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function bandIncludes(range, n) {
+  if (range.includes('-')) {
+    const [lo,hi] = range.split('-').map(x=>+x);
+    return n >= lo && n <= hi;
+  }
+  return +range === n;
+}
+
+function hrRoll() {
+  hrLastRoll = Math.floor(Math.random()*20) + 1;
+  renderHR();
+}
+
+function bankEffect(hero, name) {
+  state.bankedEffects.push({hero, name});
+  saveState();
+  renderHR();
+}
+
+/* ============================================================
+   M5: MOVEMENT COMPASS
+   ============================================================ */
+function renderMC() {
+  document.getElementById('mc-root').innerHTML = `
+    <div class="card">
+      <h3 style="margin-top:0">The targeting algorithm</h3>
+      <ol class="tight">
+        <li>Find <b>shortest path</b> distance from the Monster to every character on the board (Teleport Circles + secret passages = 1 step).</li>
+        <li><b>Red Dragon:</b> exclude any character in Waterdeep. If all characters are in Waterdeep, the Dragon doesn\u2019t move.</li>
+        <li>Pick the <b>minimum distance</b>. If multiple characters tie at that distance:</li>
+        <li>If any <b>Hero</b> is in the tied set → target a Hero. Multiple Heroes → <b>active player chooses</b>.</li>
+        <li>If only Citizens are tied → target a Citizen.</li>
+        <li>Monster moves along the shortest path. If multiple paths tie in length, active player picks.</li>
+        <li>If it enters a location with a character, it <b>stops there</b>.</li>
+        <li>If it <b>starts</b> in a location with a character, it does <b>not move</b>.</li>
+        <li>No reachable characters → no movement.</li>
+      </ol>
+    </div>
+
+    <div class="card-info">
+      <b>Quick rule of thumb:</b> Heroes beat Citizens on ties. Active player breaks Hero-vs-Hero ties. Red Dragon never enters Waterdeep.
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Common confusions</h3>
+      <ul class="tight">
+        <li>"Toward" always means <b>shortest path</b>, not just any adjacent location.</li>
+        <li>If the Monster already shares a location with a character, it stays put (then attacks).</li>
+        <li>Monsters use Teleport Circles too — distance via circle is 1, same as Heroes.</li>
+        <li>The Cleric\u2019s 2-8 effect ("if a Hero is defeated, move them to your location") means that defeated Hero remains a valid target for subsequent attacks <i>this</i> Monster Phase only if they\u2019re re-positioned there.</li>
+      </ul>
+    </div>
+  `;
+}
+
+/* ============================================================
+   M6: EYE RAY TRACKER
+   ============================================================ */
+let erLastRoll = null;
+function renderER() {
+  const root = document.getElementById('er-root');
+  const damaged = new Set(state.eyestalks);
+  const damagedCount = damaged.size;
+
+  let rolledRay = null;
+  if (erLastRoll !== null) rolledRay = EYE_RAYS.find(r => bandIncludes(r.band, erLastRoll));
+  const rolledIsDamaged = rolledRay && damaged.has(rolledRay.band);
+
+  root.innerHTML = `
+    <div class="card">
+      <h3 style="margin-top:0">Roll Beholder\u2019s Eye Ray</h3>
+      <button class="primary" onclick="erRoll()">🎲 Roll d20</button>
+      <input type="number" min="1" max="20" placeholder="Or enter…" id="er-manual" style="width:90px;margin-left:6px">
+      <button class="secondary" onclick="erManual()">Apply</button>
+
+      ${erLastRoll !== null ? `
+        <div class="dice-display">
+          <div style="color:#e0b860;font-size:11px;text-transform:uppercase">Result</div>
+          <div class="die-face">${erLastRoll}</div>
+          <div style="color:#f0c870;font-size:16px;font-weight:bold;margin-top:6px">${rolledRay.name}</div>
+        </div>
+        ${rolledIsDamaged ? `
+          <div class="card-warn">
+            <b>Eyestalk ${rolledRay.band} is already damaged.</b><br>
+            <b>Antimagic Eye fires:</b> every Hero with Items discards 1 Item.
+          </div>
+        ` : `
+          <div class="card-info">
+            <b>Effect:</b> ${rolledRay.effect}
+          </div>
+        `}
+      ` : ''}
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Eyestalks · ${damagedCount}/10 damaged</h3>
+      <p class="muted">Tap to toggle damage. Roll lands on a damaged eyestalk → antimagic effect fires instead.</p>
+      <div class="eyestalk-grid">
+        ${EYE_RAYS.filter(r => r.band !== '1').map(r => `
+          <div class="eyestalk ${damaged.has(r.band)?'damaged':''}" onclick="toggleEyestalk('${r.band}')">
+            <span class="num">${r.band}</span>
+            <span class="name">${r.name.replace(' RAY','')}</span>
+          </div>
+        `).join('')}
+      </div>
+      <button class="secondary" onclick="state.eyestalks=[]; saveState(); renderER()">↻ Reset eyestalks</button>
+    </div>
+
+    <div class="card-dark">
+      <h3>Step 2 — Defeat Beholder</h3>
+      ${damagedCount >= 10 ? `
+        <p style="color:#fff">✓ <b>All 10 eyestalks damaged — Defeat unlocked.</b></p>
+        <p>At Beholder\u2019s location, discard <b>6+ Strength of Blue (Magical) Items</b> to blind the antimagic eye.</p>
+        <button class="primary" onclick="nav('m8')">→ Open Item Lookup (Blue filter)</button>
+      ` : `
+        <p>Locked: damage all 10 eyestalks first (${10 - damagedCount} remaining).</p>
+        <p>When unlocked: at Beholder\u2019s location, discard 6+ Strength of Blue (Magical) Items.</p>
+      `}
+    </div>
+
+    <div class="card-info">
+      <b>Eyestalk damage cheatsheet (Advance action):</b><br>
+      Discard any Item, roll d20. <b>1</b> = miss. <b>2–15</b> = damage 1 eyestalk you choose. <b>16–19</b> = damage up to 2. <b>20</b> = damage up to 3, retrieve the Item, gain a Perk.
+    </div>
+  `;
+}
+function toggleEyestalk(band) {
+  const idx = state.eyestalks.indexOf(band);
+  if (idx >= 0) state.eyestalks.splice(idx,1);
+  else state.eyestalks.push(band);
+  saveState();
+  renderER();
+}
+function erRoll() { erLastRoll = Math.floor(Math.random()*20)+1; renderER(); }
+function erManual() {
+  const v = +document.getElementById('er-manual').value;
+  if (v >= 1 && v <= 20) { erLastRoll = v; renderER(); }
+}
+
+/* ============================================================
+   M7: MONSTER MATS
+   ============================================================ */
+let mmActive = 'displacerBeast';
+function renderMM() {
+  const root = document.getElementById('mm-root');
+  const m = MONSTERS[mmActive];
+
+  const inPlay = state.monstersInPlay.includes(mmActive);
+  const isFrenzy = state.frenzyHolder === mmActive;
+
+  root.innerHTML = `
+    <div class="monster-tabs">
+      ${Object.entries(MONSTERS).map(([id,mon]) => `
+        <div class="monster-tab ${mmActive===id?'active':''}" onclick="mmActive='${id}'; renderMM()">
+          ${mon.name}
+          <span class="frenzy-num">F${mon.frenzy}</span>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div>
+          <h3 style="margin-top:0;border:none;padding:0">${m.name}</h3>
+          <span class="pill p-red">Frenzy ${m.frenzy}</span>
+          ${m.hasLair ? '<span class="pill p-purple">Has a Lair</span>' : '<span class="pill p-yellow">No Lair</span>'}
+          ${isFrenzy ? '<span class="pill p-orange">🔥 Currently Frenzied</span>' : ''}
+        </div>
+        <div>
+          <button class="secondary ${inPlay?'active':''}" onclick="toggleInPlay('${mmActive}')">${inPlay?'✓ In play':'+ Add to game'}</button>
+          ${inPlay ? `<button class="secondary ${isFrenzy?'active':''}" onclick="setFrenzy('${mmActive}')">${isFrenzy?'✓ Has Frenzy':'Pass Frenzy here'}</button>` : ''}
+        </div>
+      </div>
+      <p><b>Objective:</b> ${m.objective}</p>
+      <p><b>Power:</b> ${m.power}</p>
+    </div>
+
+    <div class="step-block">
+      <span class="step-label">STEP 1</span><span class="step-title">Advance</span>
+      <p>${m.advance}</p>
+      ${mmActive==='beholder' ? `<button class="primary" onclick="nav('m6')">→ Open Eye Ray Tracker</button>` : ''}
+    </div>
+
+    <div class="step-block">
+      <span class="step-label">STEP 2</span><span class="step-title">Defeat</span>
+      <p>${m.defeat}</p>
+      ${mmActive==='beholder' ? `<button class="primary" onclick="nav('m6')">→ Eye Ray Tracker</button>` : ''}
+      ${mmActive==='displacerBeast' ? `<button class="primary" onclick="nav('m8')">→ Items: Red &amp; Yellow, 7+ Strength</button>` : ''}
+      ${mmActive==='mimic' ? `<button class="primary" onclick="nav('m8')">→ Items: Blue (Magical), 6+ Strength</button>` : ''}
+    </div>
+
+    <div class="card-info">
+      <b>Notes:</b>
+      <ul class="tight">${m.notes.map(n=>`<li>${n}</li>`).join('')}</ul>
+    </div>
+
+    ${mmActive==='redDragon' ? `
+      <div class="card-warn">
+        <b>Red Dragon Waterdeep restrictions:</b>
+        <ul class="tight">
+          <li>Cannot enter Waterdeep locations.</li>
+          <li>If all characters are in Waterdeep, Red Dragon does not move.</li>
+          <li>Wizard teleport always sends Red Dragon to its starting Lair.</li>
+          <li>Any forced move that would push Red Dragon into Waterdeep → it doesn\u2019t move at all.</li>
+        </ul>
+      </div>
+    ` : ''}
+  `;
+}
+function toggleInPlay(id) {
+  const idx = state.monstersInPlay.indexOf(id);
+  if (idx >= 0) {
+    state.monstersInPlay.splice(idx,1);
+    if (state.frenzyHolder === id) {
+      state.frenzyHolder = state.monstersInPlay[0] || null;
+    }
+  } else {
+    state.monstersInPlay.push(id);
+    // Re-sort by frenzy
+    state.monstersInPlay.sort((a,b)=>MONSTERS[a].frenzy - MONSTERS[b].frenzy);
+    if (!state.frenzyHolder) state.frenzyHolder = state.monstersInPlay[0];
+  }
+  saveState();
+  renderMM();
+  renderTopbar();
+}
+function setFrenzy(id) {
+  state.frenzyHolder = id;
+  saveState();
+  renderMM();
+  renderTopbar();
+}
+
+function cycleFrenzy() {
+  // Per rulebook: move to monster with next-highest Frenzy Order; wrap to lowest if none higher.
+  const inPlay = state.monstersInPlay.slice().sort((a,b) => MONSTERS[a].frenzy - MONSTERS[b].frenzy);
+  if (inPlay.length === 0) return;
+  if (inPlay.length === 1) return; // only one monster, marker doesn't move
+  const currentFrenzy = state.frenzyHolder ? MONSTERS[state.frenzyHolder].frenzy : -1;
+  const next = inPlay.find(id => MONSTERS[id].frenzy > currentFrenzy) || inPlay[0];
+  state.frenzyHolder = next;
+  saveState();
+  renderTopbar();
+  renderMM();
+}
+
+/* ============================================================
+   M8: ITEM LOOKUP
+   ============================================================ */
+let ilFilter = {type:'', loc:'', minStr:0, selected:[]};
+function renderIL() {
+  const root = document.getElementById('il-root');
+  let filtered = ITEMS.filter(it => {
+    if (ilFilter.type && it.type !== ilFilter.type) return false;
+    if (ilFilter.loc && !it.loc.toLowerCase().includes(ilFilter.loc.toLowerCase())) return false;
+    if (it.str < ilFilter.minStr) return false;
+    return true;
+  });
+
+  const total = ilFilter.selected.reduce((s,i)=>s+ITEMS[i].str, 0);
+
+  root.innerHTML = `
+    <div class="filter-bar">
+      <div>
+        <span class="label">Type</span>
+        <span class="chip ${ilFilter.type===''?'active':''}" onclick="ilFilter.type=''; renderIL()">All</span>
+        <span class="chip ${ilFilter.type==='weapon'?'active':''}" onclick="ilFilter.type='weapon'; renderIL()"><span class="shape weapon">⬢</span>Weapon (Red)</span>
+        <span class="chip ${ilFilter.type==='magical'?'active':''}" onclick="ilFilter.type='magical'; renderIL()"><span class="shape magical">●</span>Magical (Blue)</span>
+        <span class="chip ${ilFilter.type==='mundane'?'active':''}" onclick="ilFilter.type='mundane'; renderIL()"><span class="shape mundane">■</span>Mundane (Yellow)</span>
+      </div>
+      <div>
+        <span class="label">Min Str</span>
+        ${[0,1,2,3,4,5].map(s=>`<span class="chip ${ilFilter.minStr===s?'active':''}" onclick="ilFilter.minStr=${s}; renderIL()">${s===0?'Any':s+'+'}</span>`).join('')}
+      </div>
+      <div>
+        <span class="label">Location</span>
+        <input type="text" id="il-loc" value="${ilFilter.loc}" placeholder="filter by location…" style="width:200px" oninput="ilFilter.loc=this.value; renderIL()">
+      </div>
+    </div>
+
+    ${ilFilter.selected.length ? `
+      <div class="calc-bar">
+        <div>
+          <div class="calc-label">Sum of selected</div>
+          <div class="calc-total">${total} Strength · ${ilFilter.selected.length} item${ilFilter.selected.length===1?'':'s'}</div>
+        </div>
+        <button class="primary" onclick="ilFilter.selected=[]; renderIL()">Clear selection</button>
+      </div>
+    ` : `<p class="muted">Tap items below to sum their Strength (useful for Lair reveals, Defeat costs, etc.)</p>`}
+
+    <div class="item-grid">
+      ${filtered.map((it,i) => {
+        const realIdx = ITEMS.indexOf(it);
+        const selected = ilFilter.selected.includes(realIdx);
+        return `
+          <div class="item-card ${selected?'selected':''}" onclick="ilToggle(${realIdx})">
+            <div class="top">
+              <span><span class="shape ${it.type}">${it.type==='weapon'?'⬢':it.type==='magical'?'●':'■'}</span><span class="name">${it.name}</span></span>
+              <span class="str">${it.str}</span>
+            </div>
+            <div class="loc">${it.loc}</div>
+          </div>
+        `;
+      }).join('')}
+      ${filtered.length === 0 ? '<p class="muted" style="grid-column:1/-1">No items match these filters.</p>' : ''}
+    </div>
+
+    <div class="card-info" style="margin-top:14px">
+      <b>Strength reminders:</b>
+      <ul class="tight">
+        <li><b>Reveal Lair:</b> 3+ Strength of <i>any color(s)</i> at the location.</li>
+        <li><b>Defeat Mimic:</b> 6+ Strength of <span class="pill p-blue">Blue (Magical)</span>.</li>
+        <li><b>Defeat Beholder:</b> 6+ Strength of <span class="pill p-blue">Blue (Magical)</span>.</li>
+        <li><b>Defeat Displacer Beast:</b> 7+ Strength of <span class="pill p-red">Red (Weapon)</span> or <span class="pill p-yellow">Yellow (Mundane)</span>.</li>
+      </ul>
+    </div>
+  `;
+}
+function ilToggle(i) {
+  const idx = ilFilter.selected.indexOf(i);
+  if (idx >= 0) ilFilter.selected.splice(idx,1);
+  else ilFilter.selected.push(i);
+  renderIL();
+}
+
+/* ============================================================
+   M9: LAIR HELPER
+   ============================================================ */
+function renderLH() {
+  const root = document.getElementById('lh-root');
+  const lairs = Object.entries(state.lairs);
+  root.innerHTML = `
+    <div class="card-info">
+      <b>To reveal:</b> Move to the Lair\u2019s location, then discard Items totaling <b>3+ Strength</b> in any color(s). Flip the token.<br>
+      <b>If blank:</b> No Monster lives there. The token stays put for the rest of the game.
+    </div>
+
+    <div class="lair-grid">
+      ${lairs.map(([name,status]) => `
+        <div class="lair-card ${status==='hidden'?'':status}">
+          <div class="lair-name">${name}</div>
+          <span class="status ${status}">${
+            status==='hidden' ? 'Facedown' :
+            status==='blank' ? 'Blank (no monster)' :
+            status==='revealed' ? 'Revealed' : status
+          }</span>
+          <div style="margin-top:6px">
+            ${status==='hidden' ? `
+              <button class="secondary" onclick="setLair('${name.replace(/'/g,"\\'")}','revealed')">Mark Revealed</button>
+              <button class="secondary" onclick="setLair('${name.replace(/'/g,"\\'")}','blank')">Mark Blank</button>
+            ` : `
+              <button class="secondary" onclick="setLair('${name.replace(/'/g,"\\'")}','hidden')">↻ Reset</button>
+            `}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="card-warn" style="margin-top:14px">
+      <b>Strategy notes:</b>
+      <ul class="tight">
+        <li>Revealing a Lair early is cheap (3 Strength) and information-rich, even if blank.</li>
+        <li>Displacer Beast, Mimic, and Beholder do <b>not</b> have Lairs — those 4 lair tokens are for Red Dragon (in campaign mode) and visiting monsters in combined games.</li>
+        <li>If playing Displacer Beast + Beholder (recommended first game), all 4 lairs will be blank — revealing them is purely educational.</li>
+      </ul>
+    </div>
+  `;
+}
+function setLair(name, status) {
+  state.lairs[name] = status;
+  saveState();
+  renderLH();
+}
+
+/* ============================================================
+   M10: SETUP WIZARD
+   ============================================================ */
+let swState = {step:1, players:3, firstTime:true, difficulty:'normal', heroes:[]};
+function renderSW(reset) {
+  if (reset) swState = {step:1, players:3, firstTime:true, difficulty:'normal', heroes:[]};
+  const root = document.getElementById('sw-root');
+
+  if (swState.step === 1) {
+    root.innerHTML = `
+      <div class="wizard-step">
+        <h3>1. How many players?</h3>
+        <button class="choice" onclick="swState.players=1; swState.step=2; renderSW()">1 (Solo) <span class="sub">Hard. Terror starts at 3.</span></button>
+        <button class="choice" onclick="swState.players=2; swState.step=2; renderSW()">2 Players <span class="sub">Harder. Recommend easier monster mix.</span></button>
+        <button class="choice" onclick="swState.players=3; swState.step=2; renderSW()">3 Players <span class="sub">★ Recommended for first game</span></button>
+        <button class="choice" onclick="swState.players=4; swState.step=2; renderSW()">4 Players <span class="sub">★ Recommended for first game</span></button>
+        <button class="choice" onclick="swState.players=5; swState.step=2; renderSW()">5 Players <span class="sub">Max. More chaos.</span></button>
+      </div>
+    `;
+    return;
+  }
+
+  if (swState.step === 2) {
+    root.innerHTML = `
+      <button class="secondary" onclick="swState.step=1; renderSW()">← Back</button>
+      <div class="wizard-step">
+        <h3>2. First time playing Horrified: D&amp;D?</h3>
+        <button class="choice" onclick="swState.firstTime=true; swState.step=3; renderSW()">Yes <span class="sub">→ Force Displacer Beast + Beholder. Skip Mimic and Red Dragon.</span></button>
+        <button class="choice" onclick="swState.firstTime=false; swState.step=3; renderSW()">No <span class="sub">→ Let me pick any monsters.</span></button>
+      </div>
+    `;
+    return;
+  }
+
+  if (swState.step === 3) {
+    let monsters;
+    if (swState.firstTime) {
+      monsters = ['displacerBeast', 'beholder'];
+      state.monstersInPlay = monsters;
+      state.frenzyHolder = 'displacerBeast';
+    }
+    root.innerHTML = `
+      <button class="secondary" onclick="swState.step=2; renderSW()">← Back</button>
+      <div class="wizard-step">
+        <h3>3. Monsters</h3>
+        ${swState.firstTime ? `
+          <p>Locked: <b>Displacer Beast (Frenzy 1)</b> + <b>Beholder (Frenzy 4)</b>. Frenzy marker starts on Displacer Beast.</p>
+        ` : `
+          <p>Toggle monsters in play:</p>
+          ${Object.entries(MONSTERS).map(([id,m]) => `
+            <button class="secondary ${state.monstersInPlay.includes(id)?'active':''}" onclick="toggleInPlay('${id}'); renderSW()">
+              ${m.name} (F${m.frenzy})
+            </button>
+          `).join('')}
+          <p class="muted" style="margin-top:8px">Currently in play: ${state.monstersInPlay.map(id=>MONSTERS[id].name).join(', ') || 'none'}</p>
+        `}
+        <button class="primary" onclick="swState.step=4; renderSW()">Next →</button>
+      </div>
+    `;
+    return;
+  }
+
+  if (swState.step === 4) {
+    root.innerHTML = `
+      <button class="secondary" onclick="swState.step=3; renderSW()">← Back</button>
+      <div class="wizard-step">
+        <h3>4. Recommended Heroes for ${swState.players} player${swState.players===1?'':'s'}</h3>
+        <p>${swState.firstTime ? 'For your first game, lean on these — they\u2019re forgiving:' : 'Any combination works.'}</p>
+        <ul class="tight">
+          <li><b>Fighter</b> — straightforward combat. ★ Beginner-friendly</li>
+          <li><b>Cleric</b> — defensive, banks effects. ★ Beginner-friendly</li>
+          <li><b>Bard</b> — utility/repositioning without complexity. ★ Beginner-friendly</li>
+          <li><b>Wizard</b> — powerful but teleport can backfire (it always works, even unwanted). Tricky.</li>
+          <li><b>Rogue</b> — Item economy, but rewards planning. Tricky.</li>
+        </ul>
+        <button class="primary" onclick="swState.step=5; renderSW()">→ Generate setup checklist</button>
+      </div>
+    `;
+    return;
+  }
+
+  if (swState.step === 5) {
+    if (swState.players === 1 && state.terror < 3) { state.terror = 3; saveState(); renderTopbar(); }
+    root.innerHTML = `
+      <button class="secondary" onclick="swState.step=4; renderSW()">← Back</button>
+      <div class="wizard-step">
+        <h3>Setup Checklist</h3>
+        <div class="checklist">
+<span class="check">☐</span> Set out the gameboard<br>
+<span class="check">☐</span> Place <b>Terror Marker</b> on <b>${swState.players===1?'3 (solo)':'0'}</b><br>
+<span class="check">☐</span> Shuffle the 4 <b>Lair tokens</b> facedown at Skull Island, Dragon\u2019s Platform, Obelisk of the Eye, Abandoned Camp<br>
+<span class="check">☐</span> Shuffle <b>Monster deck</b>; set facedown<br>
+<span class="check">☐</span> Put 10 <b>Citizen standees</b> in clear bases, set aside<br>
+<span class="check">☐</span> Choose Monsters: <b>${state.monstersInPlay.map(id=>MONSTERS[id].name).join(', ')}</b><br>
+<span class="check">☐</span> Place Monster mats by Frenzy order (lowest → highest)<br>
+<span class="check">☐</span> Place <b>Frenzy Marker</b> on lowest-Frenzy mat<br>
+<span class="check">☐</span> Follow each Monster\u2019s individual setup (Mimic on its mat, Red Dragon obstacles, etc.)<br>
+<span class="check">☐</span> Each player picks a Hero, takes tile + standee + reference card<br>
+<span class="check">☐</span> Place Hero standees at starting locations<br>
+<span class="check">☐</span> Shuffle Perk deck; deal 1 Perk per player<br>
+<span class="check">☐</span> Put 60 Item tokens in Haversack, shake, <b>draw 12</b> and place on board<br>
+<span class="check">☐</span> Roll d20 — highest = first player, play clockwise<br>
+        </div>
+        <button class="primary" onclick="window.print()">🖨 Print checklist</button>
+        <button class="secondary" onclick="renderSW(true)">↻ Start over</button>
+      </div>
+    `;
+  }
+}
+
+/* ============================================================
+   M11: GLOSSARY
+   ============================================================ */
+function renderGloss(query) {
+  const list = document.getElementById('gloss-list');
+  const q = (query||'').toLowerCase();
+  const filtered = GLOSSARY.filter(([term,def]) =>
+    !q || term.toLowerCase().includes(q) || def.toLowerCase().includes(q)
+  );
+  list.innerHTML = filtered.map(([t,d]) => `<dt>${t}</dt><dd>${d}</dd>`).join('');
+  if (!filtered.length) list.innerHTML = '<dd class="muted">No matches.</dd>';
+}
+
+/* ============================================================
+   RENDER ALL & INIT
+   ============================================================ */
+function renderAll() {
+  renderTC('start');
+  renderCW(true);
+  arInit();
+  renderAR();
+  renderHR();
+  renderMC();
+  renderER();
+  renderMM();
+  renderIL();
+  renderLH();
+  renderSW(true);
+  renderGloss('');
+  renderTopbar();
+}
+
+// Init
+loadState();
+renderAll();
+document.getElementById('gloss-search').addEventListener('input', e => renderGloss(e.target.value));
+
+</script>
+
+</body>
+</html>
