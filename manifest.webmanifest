@@ -1,0 +1,9 @@
+{
+  "name": "Horrified D&D — New Player Toolkit",
+  "short_name": "HD&D",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#2a1a0a",
+  "theme_color": "#2a1a0a"
+}

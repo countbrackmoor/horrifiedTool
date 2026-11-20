@@ -4,6 +4,37 @@ Fan toolkit for Horrified: Dungeons & Dragons. Repo: `countbrackmoor/horrifiedTo
 
 ---
 
+## 2026-11-19 — Review pass: fixes, dim theme, undo, offline
+
+### Fixed
+- Terror 5 alert ("One more and you lose") never displayed — the Terror ≥ 4 check ran first and shadowed it; order corrected
+- Setup Wizard silently set Terror to 3 when solo was chosen and never reverted it if the player count changed; it now only raises Terror if the game hasn't moved it, and undoes its own change when switching away from solo (`soloTerrorApplied` flag)
+- Eye Ray Tracker eyestalk grid overflowed 18px at phone width (forced 5 columns with long ray names); now 2 columns under 600px, 5 on wider screens
+- Print checklist printed the sticky top bar and the whole UI; added `@media print` sheet that prints only the active module in black on white
+
+### Changed
+- Storage schema v2: key `hd5e-toolkit-v2`, stored as `{schemaVersion, state}`; deep-merges against defaults so new nested fields (lairs, citizens) survive older saves. Existing `hd5e-toolkit-v1` saves migrate automatically on first load and the v1 key is removed
+- Eye Rays 12–20 (Telekinetic, Sleep, Petrification, Disintegration, Death) and Perks Skeemo Weirdbottle / Ott Steeltoes now say plainly that their card text is not transcribed, with a "Card text needed" badge — previously the text implied the toolkit covered them
+- All colors moved to role-based CSS custom properties (`--name-fg/-bg/-line`); Item shape chips keep their fixed game colors
+- `meta color-scheme` changed from `light only` to `light dark`
+- Embedded icons (favicon, apple-touch-icon, four Monster portraits) reduced to 48-colour PNGs and wrapped across short lines (browsers ignore the breaks): file 226 KB → 145 KB, no change in dimensions
+
+### Added
+- Dim theme for low-light tables; follows the device setting by default, top-bar button cycles Auto → Dim → Light (per-device key `hd5e-toolkit-theme`)
+- Undo (↶ in top bar): steps back through the last 40 tracked changes — Terror, deck, Frenzy, eyestalks, lairs, citizens, defeats, New Game
+- Keyboard and screen-reader access: every clickable tile/pill/eyestalk gets `role="button"`, a tab stop, and Enter/Space activation (including content rendered later); visible focus ring; labelled Terror/deck steppers; live region on top-bar values; focus moves to the module heading on navigation
+- Offline support: `manifest.webmanifest` and `sw.js` (network-first, falls back to cache). Registration only runs over https, so local/file use is unchanged. The existing embedded apple-touch-icon covers iOS home-screen installs; the manifest has no icon of its own yet
+
+### Removed
+- `standalone/Horrified DnD Toolkit.html` — byte-identical duplicate of `index.html` (same blob SHA) that would drift
+- `horrifiedTool-CHANGELOG.md` — stale duplicate of this file
+
+### Notes
+- Not verified against the rulebook (no rulebook in the Project): Hero d20 bands, Item list, 30-card deck, 60-token/draw-12 setup, Terror cap of 6, and `defeatMonster` lowering Terror by 1 on each defeat — the last one is suspect and should be checked
+- The 2026-06-20 open item (make the Monster selector prominent) is done: the Monster strip under the top bar shows monsters in play, Frenzy holder, and opens each mat
+
+---
+
 ## 2026-06-21 — Changelog established
 
 ### Added
